@@ -1,16 +1,26 @@
-///module
+//////module////
 module add(
+  input clk,rst,
   input [3:0] a,b,
-  output [4:0] y
-	);
+  output reg [4:0]y
+);
 
-  assign y =a+b;
-
+  always@(posedge clk)
+    begin
+      if(rst)
+        y <= 5'b00000;
+      else
+        y <= a + b;
+    end
+  
 endmodule
 
-///interface
+ 
+/////interface///
 interface add_if();
-  logic [3:0]a;
-  logic [3:0]b;
-  logic [4:0]y;
-endinterface 
+  logic clk;
+  logic rst;
+  logic [3:0] a;
+  logic [3:0] b;
+  logic [4:0] y;
+endinterface
